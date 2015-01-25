@@ -1,4 +1,4 @@
-#include <server.h>
+#include "server.h"
 
 class ImageHandler {
 	public:
@@ -7,5 +7,5 @@ class ImageHandler {
 		bool initialization() {
 			return geometry_initialize() && image_loader_initialize();
 		}
-		
+
 }
