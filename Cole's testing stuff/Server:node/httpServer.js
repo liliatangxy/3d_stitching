@@ -1,6 +1,7 @@
 var http = require('http');
 var fs = require('fs');
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var download = require('download-file');
 
 var request = undefined;
 
@@ -29,12 +30,12 @@ http.createServer(function callback (req, res)
 		xmlhttp.onreadystatechange = function() 
 		{		
 			console.log("On ready state change");
-  		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
-  		{
-    		var myArr = JSON.parse(xmlhttp.responseText);
-    		myFunction(myArr);
-    	}
-}
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+			{
+				var myArr = JSON.parse(xmlhttp.responseText);
+				myFunction(myArr);
+			}
+		}
 
 	});
 
@@ -45,14 +46,35 @@ http.createServer(function callback (req, res)
 
 function myFunction(arr) 
 {
-    var items = arr.items;
-    				
-    for(var i = 0; i < items.length; i++)
-    {
-    	console.log(items[i].link);
-    }	
+	var items = arr.items;
+
+	for(var i = 0; i < items.length; i++)
+	{
+		console.log(items[i].link);
+
+		//download api thingy
+		var url = items[i].link;
+
+		var options = 
+		{
+    		directory: "./images/",
+    		filename: "photo" + i + ".jpg"
+		}
+
+		download(url, options, function(err){
+    		if (err) throw err
+    		
+		});
+	}	
 }
-				
+
+
+
+
+
+
+
+
 
 
 
