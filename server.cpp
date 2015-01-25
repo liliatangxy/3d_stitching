@@ -1,11 +1,8 @@
 #include "server.h"
 
-class ImageHandler {
-	public:
-		ImageHandler() {}
+bool image_handler()
 
-		bool initialization() {
-			return geometry_initialize() && image_loader_initialize();
-		}
-
+}
+bool initialization() {
+		return geometry_initialize() && image_loader_initialize();
 }
